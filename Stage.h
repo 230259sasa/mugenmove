@@ -1,10 +1,14 @@
 #pragma once
 #include "Engine\GameObject.h"
+#include<vector>
+
 class Stage :
     public GameObject
 {
 	int hFloor_;
 	int hWall_;
+
+	std::vector<std::vector<int>> mapArray;
 public:
 	Stage(GameObject* parent);
 
