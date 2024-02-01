@@ -1,8 +1,8 @@
 #include "Stage.h"
 #include"Engine\Model.h"
-
 #include<fstream>
 #include<sstream>
+#include"Engine\CsvReader.h"
 
 Stage::Stage(GameObject* parent)
 	:GameObject(parent,"Stage"),hFloor_(-1),hWall_(-1)
@@ -16,10 +16,10 @@ void Stage::Initialize()
 	hWall_ = Model::Load("Model\\Wall.fbx");
 	assert(hFloor_ >= 0);
 
-	std::vector<std::string> rData;
+	/*std::vector<std::string> rData;
 
 	std::ifstream ifs;
-	ifs.open("mapdate.csv");
+	ifs.open("mapdata.csv");
 
 	if (ifs.fail())
 	{
@@ -44,7 +44,24 @@ void Stage::Initialize()
 		}
 		mapArray.push_back(vtmp);
 	}
-	ifs.close();
+	ifs.close();*/
+
+	CsvReader csv;
+	csv.Load("mapframedata.csv");
+	stageWidth_ = csv.GetWidth();
+	stageHeight_ = csv.GetHeight();
+
+	for (int i = 0; i < stageWidth_; i++) {
+		std::vector<int>sdata(stageWidth_, 0);
+		stageData.push_back(sdata);
+	}
+
+	for (int j = 0; j < stageHeight_; j++) {
+		for (int i = 0; i < stageWidth_; i++) {
+			stageData[j][i] = csv.GetValue(i,j);
+		}
+	}
+
 }
 
 void Stage::Update()
@@ -58,17 +75,17 @@ void Stage::Draw()
 	Transform wallTrans;
 	wallTrans.position_ = { 0,0,0 };
 
-	for (int x = 0; x < 15; x++) {
-		for (int z = 0; z < 15; z++) {
-			if (mapArray[z][x] == 1) {
-				wallTrans.position_ = { float(x) * 1 - mapArray[0].size() / 2,0,
-					float(z) * -1 + mapArray.size() / 2 };
+	for (int x = 0; x < stageWidth_; x++) {
+		for (int z = 0; z < stageHeight_; z++) {
+			if (stageData[z][x] == 1) {
+				wallTrans.position_ = { float(x),0,
+					float(z) * -1 };
 				Model::SetTransform(hWall_, wallTrans);
 				Model::Draw(hWall_);
 			}
-			else if (mapArray[z][x] == 0) {
-				floorTrans.position_ = { float(x) * 1 - mapArray[0].size() / 2,0,
-					float(z) * -1 + mapArray.size() / 2 };
+			else if (stageData[z][x] == 0) {
+				floorTrans.position_ = { float(x),0,
+					float(z) * -1 };
 				Model::SetTransform(hFloor_, floorTrans);
 				Model::Draw(hFloor_);
 			}
@@ -78,4 +95,18 @@ void Stage::Draw()
 
 void Stage::Release()
 {
+	for (int i = 0; i < stageWidth_; i++) {
+		std::vector<int>sdata(stageWidth_, 0);
+		stageData.push_back(sdata);
+	}
+}
+
+bool Stage::IsWall(int _x, int _y)
+{
+	//assert(_x > 0 && _x <= stageWidth_ && _y > 0 && _y <= stageHeight_);
+	if (stageData[_y][_x] == STAGE_OBJ::WALL) {
+		return true;
+	}
+	else
+		return false;
 }

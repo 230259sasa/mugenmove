@@ -1,6 +1,7 @@
 #include "PlayScene.h"
 #include "Engine/Camera.h"
 #include "Engine/SceneManager.h"
+#include "Player.h"
 #include "Stage.h"
 
 PlayScene::PlayScene(GameObject* parent)
@@ -11,8 +12,9 @@ PlayScene::PlayScene(GameObject* parent)
 void PlayScene::Initialize()
 {
 	Instantiate<Stage>(this);
-	Camera::SetPosition({ 0,20,-10 });
-	Camera::SetTarget({ 0,10,-5 });
+	Instantiate<Player>(this);
+	Camera::SetPosition({ 7,18,-16 });
+	Camera::SetTarget({ 7,0,-8 });
 }
 
 void PlayScene::Update()
