@@ -4,7 +4,7 @@
 
 Gauge::Gauge(GameObject* parent)
 	:GameObject(parent, "Gauge"), hGaugeBar_(-1), hGaugeFrame_(-1),
-	gaugeCrrVal_(50),gaugeMaxVal_(100)
+	gaugeCrrVal_(0),gaugeMaxVal_(0)
 {
 }
 
