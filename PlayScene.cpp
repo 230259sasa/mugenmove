@@ -3,6 +3,7 @@
 #include "Engine/SceneManager.h"
 #include "Player.h"
 #include "Stage.h"
+#include "Gauge.h"
 
 PlayScene::PlayScene(GameObject* parent)
 	:GameObject(parent,"PlayScene")
@@ -13,7 +14,8 @@ void PlayScene::Initialize()
 {
 	Instantiate<Stage>(this);
 	Instantiate<Player>(this);
-	Camera::SetPosition({ 7,18,-16 });
+	Instantiate<Gauge>(this);
+	Camera::SetPosition({ 7,15,-16 });
 	Camera::SetTarget({ 7,0,-8 });
 }
 

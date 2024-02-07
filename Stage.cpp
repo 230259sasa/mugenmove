@@ -74,7 +74,6 @@ void Stage::Draw()
 	floorTrans.position_ = { 0,0,0 };
 	Transform wallTrans;
 	wallTrans.position_ = { 0,0,0 };
-
 	for (int x = 0; x < stageWidth_; x++) {
 		for (int z = 0; z < stageHeight_; z++) {
 			if (stageData[z][x] == 1) {

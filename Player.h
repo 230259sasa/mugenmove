@@ -13,6 +13,8 @@ class Player :
 	int hModel_;
 	float speed_;
 	Stage* pStage;
+	int hpMax_;
+	int hpCrr_;
 public:
 	Player(GameObject* parent);
 
