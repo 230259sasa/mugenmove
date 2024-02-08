@@ -55,15 +55,27 @@ void Player::Update()
 	XMVECTOR posTmp = XMVectorZero();
 	posTmp = pos + speed_ * move;
 
-	int tx, ty;
-	tx = (int)(XMVectorGetX(posTmp));
-	ty = (int)(XMVectorGetZ(posTmp) * -1);
-	Debug::Log("x,z=");
+	int tx, ty,rx,ry;
+	tx = (int)(XMVectorGetX(posTmp)+0.2);
+	ty = (int)((XMVectorGetZ(posTmp) - 0.1) * -1);
+	rx = (int)(XMVectorGetX(posTmp) + 0.8);
+	ry = (int)((XMVectorGetZ(posTmp) - 0.9)* -1);
+	if (rx <= 0) {
+		rx = 0;
+	}
+	if (ry <= 0) {
+		ry = 0;
+	}
+	if (tx < 0)
+		tx = 0;
+	if (ty <= 0)
+		ty = 0;
+	/*Debug::Log("x,z=");
 	Debug::Log(tx);
 	Debug::Log(",");
-	Debug::Log(ty,true);
+	Debug::Log(ty,true);*/
 
-	if (!pStage->IsWall(tx, ty)) {
+	if (!pStage->IsWall(tx, ty) ) {
 		pos = posTmp;
 		if (!XMVector3Equal(move, XMVectorZero())) {
 			XMStoreFloat3(&(transform_.position_), pos);
@@ -74,7 +86,7 @@ void Player::Update()
 			//Debug::Log(",");
 			//Debug::Log(XMVectorGetZ(modifiedVec));
 
-			float angle = atan2(XMVectorGetX(move), XMVectorGetZ(move));
+			//float angle = atan2(XMVectorGetX(move), XMVectorGetZ(move));
 			//Debug::Log("=>");
 			//Debug::Log(XMConvertToDegrees(angle),true);
 			//float rotAngle[5] = { 0,90,180,270,0 };
@@ -83,7 +95,7 @@ void Player::Update()
 			/*XMVECTOR vdot = XMVector3Dot(vFront, move);
 			assert(XMVectorGetX(vdot) <= 1 && XMVectorGetX(vdot) >= -1);
 			float angle = acos(XMVectorGetX(vdot));*/
-			//float angle = atan2(XMVectorGetX(move), XMVectorGetZ(move));
+			float angle = atan2(XMVectorGetX(move), XMVectorGetZ(move));
 			/*XMVECTOR vCross = XMVector3Cross(vFront, move);
 			if (XMVectorGetY(vCross) < 0) {
 				angle *= -1;
@@ -91,8 +103,16 @@ void Player::Update()
 			transform_.rotate_.y = XMConvertToDegrees(angle);
 		}
 	}
-	else
+	else {
 		hpCrr_ -= 0.1;
+		float angle = atan2(XMVectorGetX(move), XMVectorGetZ(move));
+		/*XMVECTOR vCross = XMVector3Cross(vFront, move);
+		if (XMVectorGetY(vCross) < 0) {
+			angle *= -1;
+		}*/
+		transform_.rotate_.y = XMConvertToDegrees(angle);
+	}
+		
 	//回転しながら移動する
 	// 実際のパックマンの挙動を確認しろ
 	// 多分本家の挙動は無理 なぜなら弧をかいて移動しているから(x,zを同時に動かしている)

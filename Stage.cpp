@@ -47,7 +47,7 @@ void Stage::Initialize()
 	ifs.close();*/
 
 	CsvReader csv;
-	csv.Load("mapframedata.csv");
+	csv.Load("mapdata.csv");
 	stageWidth_ = csv.GetWidth();
 	stageHeight_ = csv.GetHeight();
 
