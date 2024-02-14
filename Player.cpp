@@ -56,26 +56,17 @@ void Player::Update()
 	posTmp = pos + speed_ * move;
 
 	int tx, ty,rx,ry;
-	tx = (int)(XMVectorGetX(posTmp)+0.2);
-	ty = (int)((XMVectorGetZ(posTmp) - 0.1) * -1);
+	tx = (int)(XMVectorGetX(posTmp) + 0.2);
+	ty = (int)(XMVectorGetZ(posTmp) * -1 + 0.1);
 	rx = (int)(XMVectorGetX(posTmp) + 0.8);
-	ry = (int)((XMVectorGetZ(posTmp) - 0.9)* -1);
-	if (rx <= 0) {
-		rx = 0;
-	}
-	if (ry <= 0) {
-		ry = 0;
-	}
-	if (tx < 0)
-		tx = 0;
-	if (ty <= 0)
-		ty = 0;
+	ry = (int)(XMVectorGetZ(posTmp) * - 1 + 0.9);
+
 	/*Debug::Log("x,z=");
 	Debug::Log(tx);
 	Debug::Log(",");
 	Debug::Log(ty,true);*/
 
-	if (!pStage->IsWall(tx, ty) ) {
+	if (!pStage->IsWall(tx, ty) && !pStage->IsWall(rx, ry) && !pStage->IsWall(tx, ry) && !pStage->IsWall(rx, ty)) {
 		pos = posTmp;
 		if (!XMVector3Equal(move, XMVectorZero())) {
 			XMStoreFloat3(&(transform_.position_), pos);
