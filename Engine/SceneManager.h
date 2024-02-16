@@ -5,7 +5,7 @@
 //ÉQÅ[ÉÄÇ…ìoèÍÇ∑ÇÈÉVÅ[Éì
 enum SCENE_ID
 {
-	SCENE_ID_PLAY = 0,SCENE_ID_CLEAR = 1
+	SCENE_ID_PLAY = 0,SCENE_ID_CLEAR = 1,SCENE_ID_TITLE,SCENE_ID_GAMEOVER
 };
 
 //-----------------------------------------------------------

@@ -108,6 +108,9 @@
       <Filter>Play</Filter>
     </ClCompile>
     <ClCompile Include="Gauge.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="TitleScene.cpp" />
+    <ClCompile Include="GameOverScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -189,6 +192,9 @@
       <Filter>Play</Filter>
     </ClInclude>
     <ClInclude Include="Gauge.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="TitleScene.h" />
+    <ClInclude Include="GameOverScene.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\Simple2D.hlsl">

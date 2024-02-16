@@ -8,13 +8,15 @@ enum Dir {
 };
 
 class Player :
-    public GameObject
+	public GameObject
 {
 	int hModel_;
 	float speed_;
 	Stage* pStage;
 	int hpMax_;
 	int hpCrr_;
+	int vecx;
+	int vecy;
 public:
 	Player(GameObject* parent);
 
@@ -29,5 +31,9 @@ public:
 
 	//ŠJ•ú
 	void Release() override;
-};
 
+	int GetVectorX() { return vecx; }
+	int GetVectorY() { return vecy; }
+
+	void OnCollision(GameObject* pTarget);
+};

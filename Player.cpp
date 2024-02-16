@@ -27,6 +27,8 @@ void Player::Initialize()
 	speed_ = PS::PLAYER_MOVE_SPEED;
 
 	pStage = (Stage*)FindObject("Stage");
+	SphereCollider* collision = new SphereCollider(XMFLOAT3(-0.5, 0, 0.5), 0.3f);
+	AddCollider(collision);
 }
 
 void Player::Update()
@@ -69,6 +71,10 @@ void Player::Update()
 	if (!pStage->IsWall(tx, ty) && !pStage->IsWall(rx, ry) && !pStage->IsWall(tx, ry) && !pStage->IsWall(rx, ty)) {
 		pos = posTmp;
 		if (!XMVector3Equal(move, XMVectorZero())) {
+
+			vecx = tx;
+			vecy = ty;
+
 			XMStoreFloat3(&(transform_.position_), pos);
 
 			//XMMATRIX rot = XMMatrixRotationY(XM_PIDIV2);
@@ -127,4 +133,12 @@ void Player::Draw()
 
 void Player::Release()
 {
+}
+
+void Player::OnCollision(GameObject* pTarget)
+{
+	if (pTarget->GetObjectName() == "Enemy")
+	{
+		this->KillMe();
+	}
 }
