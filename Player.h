@@ -32,8 +32,10 @@ public:
 	//ŠJ•ú
 	void Release() override;
 
-	int GetVectorX() { return vecx; }
-	int GetVectorY() { return vecy; }
+	int GetVectorX() { return int(transform_.position_.x); }
+	int GetVectorZ() { return int(transform_.position_.z); }
+	float GetFloatPosX() { return transform_.position_.x; }
+	float GetFloatPosZ() { return transform_.position_.z; }
 
 	void OnCollision(GameObject* pTarget);
 };
