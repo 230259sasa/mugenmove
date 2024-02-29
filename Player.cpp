@@ -58,11 +58,11 @@ void Player::Update()
 	posTmp = pos + speed_ * move;
 
 	int tx, ty,rx,ry;
-	//ämÇ©íÜêSÇ™äp
-	tx = (int)(XMVectorGetX(posTmp) + 0.1);//0.2
-	ty = (int)(XMVectorGetZ(posTmp) * -1 + 0.1);//0.1
-	rx = (int)(XMVectorGetX(posTmp) + 0.8);//0.8
-	ry = (int)(XMVectorGetZ(posTmp) * - 1 + 0.9);//0.9
+	
+	tx = (int)(XMVectorGetX(posTmp) + 0.05);
+	ty = (int)(XMVectorGetZ(posTmp) * -1 + 0.2);
+	rx = (int)(XMVectorGetX(posTmp) + 0.8);
+	ry = (int)(XMVectorGetZ(posTmp) * - 1 + 0.9);
 
 	/*Debug::Log("x,z=");
 	Debug::Log(tx);

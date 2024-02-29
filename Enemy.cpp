@@ -104,8 +104,8 @@ void Enemy::Update()
 		float x, z;//初期の位置から目的地までの距離
 		x = PursueArr[nowarrpos].x - startX;
 		z = -PursueArr[nowarrpos].y - startZ;
-		//rateは1フレームに移動する割合
-		// 割合は移動量/距離  
+		//rateは移動する割合
+		// 1フレームの移動の割合はスピード/距離  
 		// 割合が1を超える場合はrate=1.0にする
 		//
 		rateX += speed_ / abs(x);
