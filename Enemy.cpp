@@ -34,9 +34,10 @@ void Enemy::Update()
 	// そこから次に向かう座標を求める
 	// 移動
 	//
+	//XMVECTOR pos = XMLoadFloat3(&(transform_.position_));
+	//XMVECTOR move{ 0,0,0,0 };
+	/*int nowpos = 0;
 	
-	int nowpos = 0;
-	XMVECTOR pos = XMLoadFloat3(&(transform_.position_));
 	int myx = (int)(XMVectorGetX(pos) - 0.5);
 	int myy = (int)(XMVectorGetZ(pos) * -1 + 0.4);
 	for (int i = 0; i < PursueArr.size(); i++) {
@@ -45,8 +46,7 @@ void Enemy::Update()
 			break;
 		}
 	}
-
-	XMVECTOR move{ 0,0,0,0 };
+	
 	if (nowpos + 1 < PursueArr.size())
 		if (nowpos < PursueArr.size()) {
 			if (myx != PursueArr[nowpos + 1].x) {
@@ -65,10 +65,42 @@ void Enemy::Update()
 					move = XMVECTOR{ 0,0,-1,0 };
 				}
 			}
-		}
+		}*/
+	/*pos = pos + speed_ * move;
+	XMStoreFloat3(&(transform_.position_), pos);*/
 
-	pos = pos + speed_ * move;
-	XMStoreFloat3(&(transform_.position_), pos);
+	// Pursueを動かしたらnowarrを初期化
+	// nowarrの数字を参照して配列から座標を取り出す
+	// 座標に向かって移動
+	// 目的地に着いたらnowarrを+1(PursueArrの大きさを超えたら移動をしない)
+	//
+	
+
+	//PursueArrの大きさをnowarrが超えたら移動をしない
+	if (PursueArr.size() > nowarrpos) {
+		float x, z;//初期の位置から目的地までの距離
+		x = PursueArr[nowarrpos].x - startX;
+		z = PursueArr[nowarrpos].y - startZ;
+		//rateは1フレームに移動する割合
+		// 割合は移動量/距離  
+		// 割合が1を超える場合はrate=1.0にする
+		//
+		rateX += speed_ / x;
+		rateZ += speed_ / z;
+		if (rateX > 1.0f) {
+			rateX = 1.0f;
+		}
+		if (rateZ > 1.0f) {
+			rateZ = 1.0f;
+		}
+		//距離*レート+初期位置で移動
+		transform_.position_.x = x * rateX + startX;
+		transform_.position_.z = z * rateZ + startZ;
+		//目標地点に着いたらnowarrを+１
+		if (rateX >= 1.0f && rateZ >= 1.0f) {
+			nowarrpos++;
+		}
+	}
 }
 
 void Enemy::Draw()
@@ -100,6 +132,9 @@ void Enemy::Pursue()
 	// int型に変換するせいで実際の位置と行きたい場所で誤差が生じている
 	// 四隅の座標でおこなっていないので壁との当たり判定が機能していない
 	//
+	nowarrpos = 0;
+	startX = transform_.position_.x;
+	startZ = transform_.position_.z;
 	Player* pPlayer;
 	pPlayer = (Player*)FindObject("Player");
 	int px = pPlayer->GetVectorX();
@@ -186,5 +221,10 @@ void Enemy::Pursue()
 	nowPursue = 0;
 
 	Arr.clear();
-	
+
+	//float x, z;//初期の位置から目的地までの距離
+	//x = PursueArr[0].x - startX;
+	//z = PursueArr[0].y - startZ;
+	//rateX = speed_ / x;
+	//rateZ = speed_ / z;
 }

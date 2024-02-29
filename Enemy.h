@@ -20,6 +20,9 @@ class Enemy :
 	int nowPursue;
 	std::vector<Vec> PursueArr;
 	int Frame;
+	int nowarrpos; //Œ»İ‚ÌˆÊ’u‚ª”z—ñ‚Ì‚Ç‚±‚©
+	float startX, startZ;
+	float rateX, rateZ;
 public:
 	Enemy(GameObject* parent);
 
