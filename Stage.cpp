@@ -3,6 +3,7 @@
 #include<fstream>
 #include<sstream>
 #include"Engine\CsvReader.h"
+#include"Energy.h"
 
 Stage::Stage(GameObject* parent)
 	:GameObject(parent,"Stage"),hFloor_(-1),hWall_(-1)
@@ -59,6 +60,10 @@ void Stage::Initialize()
 	for (int j = 0; j < stageHeight_; j++) {
 		for (int i = 0; i < stageWidth_; i++) {
 			stageData[j][i] = csv.GetValue(i,j);
+			if (csv.GetValue(i, j) == 0) {
+				Energy* pEnergy = Instantiate<Energy>(GetParent());
+				pEnergy->SetPosition(i,0.2,-j);
+			}
 		}
 	}
 

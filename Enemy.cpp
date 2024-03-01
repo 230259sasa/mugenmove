@@ -90,9 +90,9 @@ void Enemy::Update()
 	// 改良点
 	// Playerの位置をint変換しているので近すぎると追わなくなる
 	// 配列の最後まで移動してかつPlayerの位置が近かったら(0.5くらい?)
-	// 直接接近するようにする。 済み
-	// プレイヤーが壁の中にいる扱いになるときがある　角とか
-	// 
+	// 直接接近するようにする。 <--壁を無視してしまうのでなし
+	// プレイヤーが壁の中にいる扱いになるときがある　角とか　intに変換するせい？
+	// Energyの当たり判定の処理がかなり重いので別途でEnergyの配置を描いたマップがあったらいいかも
 	//
 	Player* pPlayer;
 	pPlayer = (Player*)FindObject("Player");
@@ -134,39 +134,40 @@ void Enemy::Update()
 			rateZ = 0;
 		}
 	}
-	else if(abs(px - transform_.position_.x) < 1.0f && abs(pz - transform_.position_.z) < 1.0f){
-		float x, z;//初期の位置から目的地までの距離
-		x = px - startX;
-		z = pz - startZ;
-		//rateは1フレームに移動する割合
-		// 割合は移動量/距離  
-		// 割合が1を超える場合はrate=1.0にする
-		//
-		rateX += speed_ / abs(x);
-		rateZ += speed_ / abs(z);
+	//壁を無視してしまうのでなし
+	//else if(abs(px - transform_.position_.x) < 1.0f && abs(pz - transform_.position_.z) < 1.0f){
+	//	float x, z;//初期の位置から目的地までの距離
+	//	x = px - startX;
+	//	z = pz - startZ;
+	//	//rateは1フレームに移動する割合
+	//	// 割合は移動量/距離  
+	//	// 割合が1を超える場合はrate=1.0にする
+	//	//
+	//	rateX += speed_ / abs(x);
+	//	rateZ += speed_ / abs(z);
 
-		Debug::Log(rateX);
-		Debug::Log(",");
-		Debug::Log(rateZ, true);
+	//	Debug::Log(rateX);
+	//	Debug::Log(",");
+	//	Debug::Log(rateZ, true);
 
-		if (rateX > 1.0f) {
-			rateX = 1.0f;
-		}
-		if (rateZ > 1.0f) {
-			rateZ = 1.0f;
-		}
-		//距離*レート+初期位置で移動
-		transform_.position_.x = (x * rateX) + startX;
-		transform_.position_.z = (z * rateZ) + startZ;
-		//目標地点に着いたらnowarrを+１
-		//startの更新,rateの初期化、
-		if (rateX >= 1.0f && rateZ >= 1.0f) {
-			startX = transform_.position_.x;
-			startZ = transform_.position_.z;
-			rateX = 0;
-			rateZ = 0;
-		}
-	}
+	//	if (rateX > 1.0f) {
+	//		rateX = 1.0f;
+	//	}
+	//	if (rateZ > 1.0f) {
+	//		rateZ = 1.0f;
+	//	}
+	//	//距離*レート+初期位置で移動
+	//	transform_.position_.x = (x * rateX) + startX;
+	//	transform_.position_.z = (z * rateZ) + startZ;
+	//	//目標地点に着いたらnowarrを+１
+	//	//startの更新,rateの初期化、
+	//	if (rateX >= 1.0f && rateZ >= 1.0f) {
+	//		startX = transform_.position_.x;
+	//		startZ = transform_.position_.z;
+	//		rateX = 0;
+	//		rateZ = 0;
+	//	}
+	//}
 }
 
 void Enemy::Draw()

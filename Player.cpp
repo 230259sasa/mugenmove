@@ -27,7 +27,7 @@ void Player::Initialize()
 	speed_ = PS::PLAYER_MOVE_SPEED;
 
 	pStage = (Stage*)FindObject("Stage");
-	SphereCollider* collision = new SphereCollider(XMFLOAT3(-0.5, 0, 0.5), 0.3f);
+	SphereCollider* collision = new SphereCollider(XMFLOAT3(-0.7, 0, 0.5), 0.3f);
 	AddCollider(collision);
 }
 
@@ -59,15 +59,15 @@ void Player::Update()
 
 	int tx, ty,rx,ry;
 	
-	tx = (int)(XMVectorGetX(posTmp) + 0.05);
-	ty = (int)(XMVectorGetZ(posTmp) * -1 + 0.2);
-	rx = (int)(XMVectorGetX(posTmp) + 0.8);
-	ry = (int)(XMVectorGetZ(posTmp) * - 1 + 0.9);
+	tx = (int)(XMVectorGetX(posTmp)  + 0);
+	ty = (int)(XMVectorGetZ(posTmp) * -1 + 0);
+	rx = (int)(XMVectorGetX(posTmp) + 0.7);
+	ry = (int)(XMVectorGetZ(posTmp) * - 1 + 0.8);
 
-	/*Debug::Log("x,z=");
-	Debug::Log(tx);
+	Debug::Log("x,z=");
+	Debug::Log(int(transform_.position_.x));
 	Debug::Log(",");
-	Debug::Log(ty,true);*/
+	Debug::Log(int(transform_.position_.z), true);
 
 	if (!pStage->IsWall(tx, ty) && !pStage->IsWall(rx, ry) && !pStage->IsWall(tx, ry) && !pStage->IsWall(rx, ty)) {
 		pos = posTmp;
@@ -111,12 +111,6 @@ void Player::Update()
 		transform_.rotate_.y = XMConvertToDegrees(angle);
 	}
 		
-	//回転しながら移動する
-	// 実際のパックマンの挙動を確認しろ
-	// 多分本家の挙動は無理 なぜなら弧をかいて移動しているから(x,zを同時に動かしている)
-	// 角が決まっていればなんとか？
-	// 工夫がんばれ
-	//
 	Gauge* pGauge = (Gauge*)FindObject("Gauge");
 	pGauge->SetGaugeVal(hpCrr_, hpMax_);
 	
@@ -125,7 +119,7 @@ void Player::Update()
 void Player::Draw()
 {
 	Transform t = transform_;
-	t.position_.x = transform_.position_.x - 0.5;
+	t.position_.x = transform_.position_.x - 0.7;
 	t.position_.y = transform_.position_.y;
 	t.position_.z = transform_.position_.z + 0.5;
 	Model::SetTransform(hModel_, t);
