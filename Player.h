@@ -4,7 +4,7 @@
 class Stage;
 
 enum Dir {
-	UP, RIGHT, DOWN, LEFT, NONE
+	RIGHT,LEFT, NONE
 };
 
 class Player :
@@ -12,11 +12,11 @@ class Player :
 {
 	int hModel_;
 	float speed_;
+	float moveingposition[3];
+	int moveingpositionnum;
 	Stage* pStage;
-	int hpMax_;
-	int hpCrr_;
-	int vecx;
-	int vecy;
+	bool IsLeftDown;
+	bool IsRightDown;
 public:
 	Player(GameObject* parent);
 

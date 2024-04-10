@@ -2,27 +2,12 @@
 #include "Engine\GameObject.h"
 #include<vector>
 
-class Stage;
-
-const int STAGE_SIZE(15);
-
 class Enemy :
     public GameObject
 {
-	struct Vec {
-		int x;
-		int y;
-	};
 	int hModel_;
 	float speed_;
-	Stage* pStage;
-	int table[STAGE_SIZE][STAGE_SIZE];
-	int nowPursue;
-	std::vector<Vec> PursueArr;
-	int Frame;
-	int nowarrpos; //åªç›ÇÃà íuÇ™îzóÒÇÃÇ«Ç±Ç©
-	float startX, startZ;
-	float rateX, rateZ;
+	bool ismove_;
 public:
 	Enemy(GameObject* parent);
 
@@ -38,6 +23,12 @@ public:
 	//äJï˙
 	void Release() override;
 
-	void Pursue();
+	void SetTransformPosition(float _x, float _y, float _z) {
+		transform_.position_ = { _x,_y,_z };
+	}
+
+	void IsMoveStart() { ismove_ = true; }
+	void IsMoveStop() { ismove_ = false; }
+	void SetSpeed(float _speed) { speed_ = _speed; }
 };
 

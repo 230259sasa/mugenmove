@@ -3,8 +3,8 @@
 #include "Engine/SceneManager.h"
 #include "Player.h"
 #include "Stage.h"
-#include "Gauge.h"
 #include"Enemy.h"
+#include"EnemyMaster.h"
 
 PlayScene::PlayScene(GameObject* parent)
 	:GameObject(parent,"PlayScene")
@@ -15,10 +15,10 @@ void PlayScene::Initialize()
 {
 	Instantiate<Stage>(this);
 	p = Instantiate<Player>(this);
-	Instantiate<Gauge>(this);
-	Instantiate<Enemy>(this);
-	Camera::SetPosition({ 7,15,-16 });
-	Camera::SetTarget({ 7,0,-8 });
+	Instantiate<EnemyMaster>(this);
+	Camera::SetPosition({ 0.5,10,-2});
+	//Camera::SetPosition({ 8,0,5 });
+	Camera::SetTarget({ 0.5,0,5 });
 }
 
 void PlayScene::Update()

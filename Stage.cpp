@@ -3,10 +3,9 @@
 #include<fstream>
 #include<sstream>
 #include"Engine\CsvReader.h"
-#include"Energy.h"
 
 Stage::Stage(GameObject* parent)
-	:GameObject(parent,"Stage"),hFloor_(-1),hWall_(-1)
+	:GameObject(parent, "Stage"), hFloor_(-1), hWall_(-1), stageWidth_(3), stageHeight_(20)
 {
 }
 
@@ -16,56 +15,6 @@ void Stage::Initialize()
 	assert(hFloor_ >= 0);
 	hWall_ = Model::Load("Model\\Wall.fbx");
 	assert(hFloor_ >= 0);
-
-	/*std::vector<std::string> rData;
-
-	std::ifstream ifs;
-	ifs.open("mapdata.csv");
-
-	if (ifs.fail())
-	{
-		exit(1);
-	}
-	std::string tmp;
-	while (std::getline(ifs, tmp))
-	{
-		rData.push_back(tmp);
-	}
-
-	for (int i = 0; i < rData.size(); i++)
-	{
-		std::stringstream oss(rData[i]);
-		std::string tmp;
-		std::vector<int> vtmp;
-		while (std::getline(oss, tmp, ',')) {
-			std::stringstream iss(tmp);
-			int ntmp;
-			iss >> ntmp;
-			vtmp.push_back(ntmp);
-		}
-		mapArray.push_back(vtmp);
-	}
-	ifs.close();*/
-
-	CsvReader csv;
-	csv.Load("mapdata.csv");
-	stageWidth_ = csv.GetWidth();
-	stageHeight_ = csv.GetHeight();
-
-	for (int i = 0; i < stageWidth_; i++) {
-		std::vector<int>sdata(stageWidth_, 0);
-		stageData.push_back(sdata);
-	}
-
-	for (int j = 0; j < stageHeight_; j++) {
-		for (int i = 0; i < stageWidth_; i++) {
-			stageData[j][i] = csv.GetValue(i,j);
-			if (csv.GetValue(i, j) == 0) {
-				Energy* pEnergy = Instantiate<Energy>(GetParent());
-				pEnergy->SetPosition(i,0.2,-j);
-			}
-		}
-	}
 
 }
 
@@ -81,20 +30,14 @@ void Stage::Draw()
 	wallTrans.position_ = { 0,0,0 };
 	for (int x = 0; x < stageWidth_; x++) {
 		for (int z = 0; z < stageHeight_; z++) {
-			if (stageData[z][x] == 1) {
-				wallTrans.position_ = { float(x),0,
-					float(z) * -1 };
-				Model::SetTransform(hWall_, wallTrans);
-				Model::Draw(hWall_);
-			}
-			else if (stageData[z][x] == 0) {
-				floorTrans.position_ = { float(x),0,
-					float(z) * -1 };
-				Model::SetTransform(hFloor_, floorTrans);
-				Model::Draw(hFloor_);
-			}
+			floorTrans.position_ = { float(x),0,float(z)};
+			Model::SetTransform(hFloor_, floorTrans);
+			Model::Draw(hFloor_);
 		}
 	}
+	floorTrans.position_ = { 0,1,0 };
+	Model::SetTransform(hFloor_, floorTrans);
+	Model::Draw(hFloor_);
 }
 
 void Stage::Release()
@@ -103,14 +46,4 @@ void Stage::Release()
 		std::vector<int>sdata(stageWidth_, 0);
 		stageData.push_back(sdata);
 	}
-}
-
-bool Stage::IsWall(int _x, int _y)
-{
-	//assert(_x > 0 && _x <= stageWidth_ && _y > 0 && _y <= stageHeight_);
-	if (stageData[_y][_x] == STAGE_OBJ::WALL) {
-		return true;
-	}
-	else
-		return false;
 }

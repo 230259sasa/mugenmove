@@ -107,10 +107,12 @@
     <ClCompile Include="Player.cpp">
       <Filter>Play</Filter>
     </ClCompile>
-    <ClCompile Include="Gauge.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="GameOverScene.cpp" />
+    <ClCompile Include="EnemyMaster.cpp">
+      <Filter>Play</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -191,10 +193,12 @@
     <ClInclude Include="Player.h">
       <Filter>Play</Filter>
     </ClInclude>
-    <ClInclude Include="Gauge.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="TitleScene.h" />
     <ClInclude Include="GameOverScene.h" />
+    <ClInclude Include="EnemyMaster.h">
+      <Filter>Play</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\Simple2D.hlsl">
