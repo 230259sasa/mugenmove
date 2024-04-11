@@ -15,8 +15,6 @@ class Player :
 	float moveingposition[3];
 	int moveingpositionnum;
 	Stage* pStage;
-	bool IsLeftDown;
-	bool IsRightDown;
 public:
 	Player(GameObject* parent);
 

@@ -3,7 +3,7 @@
 
 EnemyMaster::EnemyMaster(GameObject* parent)
 	:GameObject(parent, "EnemyMaster"), frame(0),enemyrow(0),Phase(0),NextPhase(0),
-	spawnframe(120),PhaseFrame(600)
+	spawnframe(120),PhaseFrame(600),speed_(0.05)
 {
 }
 
@@ -48,7 +48,12 @@ void EnemyMaster::Update()
 				}
 			}
 
-			enemy[enemyrow][posrand]->SetTransformPosition(posrand-0.5,0.2,15);
+
+			//enemy[enemyrow][posrand]->SetTransformPosition(posrand-0.5,0.2,15);
+			Enemy* e = Instantiate<Enemy>(this);
+			e->SetTransformPosition(posrand - 0.5, 0.2, 15);
+			e->SetSpeed(speed_);
+			e->IsMoveStart();
 			enemyrand = posrand;
 		}
 		
@@ -85,12 +90,14 @@ void EnemyMaster::Update()
 			nextspeed = 0.2;
 		}
 		spawnframe = 120 / (nextspeed / 0.05);
-		for (int i = 0; i < 5; i++) {
+		speed_ = nextspeed;
+		/*for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 3; j++) {
 				enemy[i][j]->SetSpeed(nextspeed);
 			}
-		}
+		}*/
 	}
+
 	frame--;
 	PhaseFrame--;
 }

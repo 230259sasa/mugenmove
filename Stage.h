@@ -7,7 +7,7 @@ class Stage :
     public GameObject
 {
 	int hFloor_;
-	int hWall_;
+	int hLoad_;
 
 	std::vector<std::vector<int>> stageData;
 	int stageWidth_, stageHeight_;

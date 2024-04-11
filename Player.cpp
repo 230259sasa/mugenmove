@@ -18,13 +18,13 @@ Player::Player(GameObject* parent)
 
 void Player::Initialize()
 {
-	hModel_ = Model::Load("Model\\Player.fbx");
+	hModel_ = Model::Load("Model\\human.fbx");
 	assert(hModel_ >= 0);
-	//transform_.scale_ = { 0.005,0.005,0.005 };
-	//transform_.rotate_.x = -90;
-	transform_.position_ = { 0.6,0.4,3 };
+	transform_.scale_ = {0.01,0.01,0.01 };
+	transform_.rotate_.x = -90;
+	transform_.position_ = { 0.6,0.8,3 };
 	speed_ = PS::PLAYER_MOVE_SPEED;
-	SphereCollider* collision = new SphereCollider({ 0,-0.1,0 }, 0.3f);
+	SphereCollider* collision = new SphereCollider({ 0,-0.5,0 }, 0.3f);
 	AddCollider(collision);
 
 	moveingposition[0] = -0.5;
@@ -35,30 +35,22 @@ void Player::Initialize()
 void Player::Update()
 {
 	
-	if (Input::IsKey(DIK_RIGHT)) {
+	if (Input::IsMouseButtonDown(1)) {
 		/*if (transform_.position_.x < 1.6)
 			transform_.position_.x = transform_.position_.x + 0.1;*/
-		if (!IsRightDown) {
-			if (moveingpositionnum < 2)
-				moveingpositionnum++;
-		}
-
-		IsRightDown = true;
+		if (moveingpositionnum < 2)
+			moveingpositionnum++;
 	}
-	else
-		IsRightDown = false;
+		
+	
 
-	if (Input::IsKey(DIK_LEFT)) {
+	if (Input::IsMouseButtonDown(0)) {
 		/*if (transform_.position_.x > -0.5)
 			transform_.position_.x = transform_.position_.x - 0.1;*/
-		if (!IsLeftDown) {
-			if (moveingpositionnum > 0)
-				moveingpositionnum--;
-		}
-		IsLeftDown = true;
+		if (moveingpositionnum > 0)
+			moveingpositionnum--;
 	}
-	else
-		IsLeftDown = false;
+
 	//
 	// 左右中心の座標を決める
 	// ボタンを押したらその座標へ移動
@@ -89,8 +81,8 @@ void Player::Update()
 
 void Player::Draw()
 {
-	//Model::SetTransform(hModel_, transform_);
-	//Model::Draw(hModel_);
+	Model::SetTransform(hModel_, transform_);
+	Model::Draw(hModel_);
 	CollisionDraw();
 }
 

@@ -17,7 +17,7 @@ void PlayScene::Initialize()
 	p = Instantiate<Player>(this);
 	Instantiate<EnemyMaster>(this);
 	Camera::SetPosition({ 0.5,10,-2});
-	//Camera::SetPosition({ 8,0,5 });
+	//Camera::SetPosition({ 20,0,5 });
 	Camera::SetTarget({ 0.5,0,5 });
 }
 

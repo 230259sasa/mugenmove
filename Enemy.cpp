@@ -12,8 +12,8 @@ Enemy::Enemy(GameObject* parent)
 
 void Enemy::Initialize()
 {
-	hModel_ = Model::Load("Model\\Bullet.fbx");
-	//hModel_ = Model::Load("Model\\car1.fbx");
+	//hModel_ = Model::Load("Model\\Bullet.fbx");
+	hModel_ = Model::Load("Model\\car1.fbx");
 	assert(hModel_ >= 0);
 	speed_ = 0.05f;
 	//transform_.scale_ = { 0.3,0.3,0.3 };
@@ -27,6 +27,10 @@ void Enemy::Update()
 {
 	if (ismove_) {
 		transform_.position_.z -= speed_;
+	}
+
+	if (transform_.position_.z < -5) {
+		KillMe();
 	}
 }
 

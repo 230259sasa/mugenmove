@@ -21,6 +21,7 @@ class EnemyMaster :
 	int PhaseFrame;
 	int Phase;
 	int NextPhase;
+	float speed_;
 public:
 	EnemyMaster(GameObject* parent);
 
