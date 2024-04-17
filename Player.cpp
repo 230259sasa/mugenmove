@@ -18,13 +18,14 @@ Player::Player(GameObject* parent)
 
 void Player::Initialize()
 {
-	hModel_ = Model::Load("Model\\human.fbx");
+	//hModel_ = Model::Load("Model\\human.fbx");
+	hModel_ = Model::Load("Model\\Player.fbx");
 	assert(hModel_ >= 0);
-	transform_.scale_ = {0.01,0.01,0.01 };
-	transform_.rotate_.x = -90;
-	transform_.position_ = { 0.6,0.8,3 };
+	//transform_.scale_ = {0.01,0.01,0.01 };
+	//transform_.rotate_.x = -90;
+	transform_.position_ = { 0.6,0,3 };
 	speed_ = PS::PLAYER_MOVE_SPEED;
-	SphereCollider* collision = new SphereCollider({ 0,-0.5,0 }, 0.3f);
+	SphereCollider* collision = new SphereCollider({ 0,0.3,0 }, 0.3f);
 	AddCollider(collision);
 
 	moveingposition[0] = -0.5;
