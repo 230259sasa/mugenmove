@@ -113,6 +113,7 @@
     <ClCompile Include="EnemyMaster.cpp">
       <Filter>Play</Filter>
     </ClCompile>
+    <ClCompile Include="Gauge.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -199,6 +200,7 @@
     <ClInclude Include="EnemyMaster.h">
       <Filter>Play</Filter>
     </ClInclude>
+    <ClInclude Include="Gauge.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\Simple2D.hlsl">

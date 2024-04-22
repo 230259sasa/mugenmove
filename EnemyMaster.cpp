@@ -18,6 +18,7 @@ void EnemyMaster::Initialize()
 			enemy[i][j] = e;
 		}
 	}
+	PhaseGauge = (Gauge*)FindObject("Gauge");
 }
 
 void EnemyMaster::Update()
@@ -60,6 +61,7 @@ void EnemyMaster::Update()
 		enemyrow = (enemyrow + 1) % 5;
 	}
 
+	PhaseGauge->SetGaugeVal(PhaseFrame, 600);
 	if (PhaseFrame <= 0) {
 		PhaseFrame = 600;
 		NextPhase++;

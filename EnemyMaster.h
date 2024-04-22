@@ -1,6 +1,7 @@
 #pragma once
 #include "Engine\GameObject.h"
 #include"Enemy.h"
+#include"Gauge.h"
 
 namespace EnemyMasterSetting {
 	const int EnemyRow(5);
@@ -10,10 +11,12 @@ namespace EnemyMasterSetting {
 namespace EMS = EnemyMasterSetting;
 
 class Enemy;
+class Gauge;
 
 class EnemyMaster :
     public GameObject
 {
+	Gauge* PhaseGauge;
 	Enemy* enemy[EMS::EnemyRow][EMS::EnemyLine];
 	int frame;
 	int enemyrow;

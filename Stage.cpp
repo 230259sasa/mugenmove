@@ -13,8 +13,8 @@ void Stage::Initialize()
 {
 	hFloor_ = Model::Load("Model\\Floor.fbx");
 	assert(hFloor_ >= 0);
-	hLoad_ = Model::Load("Model\\load.fbx");
-	assert(hFloor_ >= 0);
+	//hLoad_ = Model::Load("Model\\load.fbx");
+	//assert(hFloor_ >= 0);
 	transform_.position_ = { 0.5,0,14 };
 }
 
@@ -24,7 +24,7 @@ void Stage::Update()
 
 void Stage::Draw()
 {
-	/*Transform floorTrans;
+	Transform floorTrans;
 	floorTrans.position_ = { 0,0,0 };
 	Transform wallTrans;
 	wallTrans.position_ = { 0,0,0 };
@@ -34,9 +34,9 @@ void Stage::Draw()
 			Model::SetTransform(hFloor_, floorTrans);
 			Model::Draw(hFloor_);
 		}
-	}*/
-	Model::SetTransform(hLoad_, transform_);
-	Model::Draw(hLoad_);
+	}
+	//Model::SetTransform(hLoad_, transform_);
+	//Model::Draw(hLoad_);
 }
 
 void Stage::Release()
