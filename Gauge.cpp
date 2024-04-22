@@ -35,9 +35,6 @@ void Gauge::Draw()
 	Image::Draw(hGaugeBar_);
 	Image::SetTransform(hGaugeFrame_, transform_);
 	Image::Draw(hGaugeFrame_);
-
-	Text t;
-	t.Draw(5, 5, 5);
 }
 
 void Gauge::Release()

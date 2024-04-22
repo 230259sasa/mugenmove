@@ -1,5 +1,6 @@
 #include "EnemyMaster.h"
 #include"Engine\Debug.h"
+#include"Engine/Text.h"
 
 EnemyMaster::EnemyMaster(GameObject* parent)
 	:GameObject(parent, "EnemyMaster"), frame(0),enemyrow(0),Phase(0),NextPhase(0),
@@ -19,6 +20,7 @@ void EnemyMaster::Initialize()
 		}
 	}
 	PhaseGauge = (Gauge*)FindObject("Gauge");
+	PhaseGauge->SetPosition(0.45, 0.9, 0);
 }
 
 void EnemyMaster::Update()
@@ -69,8 +71,10 @@ void EnemyMaster::Update()
 
 	if (Phase != NextPhase) {
 		Phase = NextPhase;
-		float nextspeed=0.05;
+		float nextspeed=0;
 		switch (Phase) {
+		case 0:
+			nextspeed = 0.05;
 		case 1:
 			nextspeed = 0.06;
 			break;
@@ -88,8 +92,13 @@ void EnemyMaster::Update()
 			break;
 		case 6:
 			nextspeed = 0.175;
+			break;
+		case 7:
+			nextspeed = 0.2;
+			break;
 		default:
 			nextspeed = 0.2;
+			//nextspeed = 0.2 + (Phase-7) * 0.05;
 		}
 		spawnframe = 120 / (nextspeed / 0.05);
 		speed_ = nextspeed;
@@ -106,6 +115,11 @@ void EnemyMaster::Update()
 
 void EnemyMaster::Draw()
 {
+	Text t;
+	char c[] = "level";
+	t.Initialize();
+	t.Draw(1100, 40, c);
+	t.Draw(1200, 40, Phase);
 }
 
 void EnemyMaster::Release()

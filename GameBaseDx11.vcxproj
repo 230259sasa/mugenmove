@@ -152,6 +152,7 @@
     <ClCompile Include="Engine\Transform.cpp" />
     <ClCompile Include="GameOverScene.cpp" />
     <ClCompile Include="Gauge.cpp" />
+    <ClCompile Include="Life.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayScene.cpp" />
     <ClCompile Include="Stage.cpp" />
@@ -185,6 +186,7 @@
     <ClInclude Include="Engine\Transform.h" />
     <ClInclude Include="GameOverScene.h" />
     <ClInclude Include="Gauge.h" />
+    <ClInclude Include="Life.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayScene.h" />
     <ClInclude Include="Stage.h" />
