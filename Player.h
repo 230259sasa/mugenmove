@@ -1,6 +1,14 @@
 #pragma once
 #include "Engine\GameObject.h"
 
+namespace PlayerSetting {
+	const int FLASHING_INTERVAL(15);
+	const int INVINCIBLE_INTERVAL(60);
+	const float PLAYER_MOVE_SPEED{ 0.1f };
+}
+
+namespace PS = PlayerSetting;
+
 class Stage;
 class Life;
 
@@ -17,7 +25,7 @@ class Player :
 	int moveingpositionnum;
 	int InvincibleTime;
 	int FlashingIntervalTime;
-	bool IsFlash;
+	bool IsDraw;
 	Stage* pStage;
 	Life* plife;
 public:

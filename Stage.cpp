@@ -5,7 +5,7 @@
 #include"Engine\CsvReader.h"
 
 Stage::Stage(GameObject* parent)
-	:GameObject(parent, "Stage"), hFloor_(-1), hLoad_(-1), stageWidth_(3), stageHeight_(20)
+	:GameObject(parent, "Stage"), hFloor_(-1), hLoad_(-1), stageWidth_(3), stageHeight_(15)
 {
 }
 
@@ -41,8 +41,8 @@ void Stage::Draw()
 
 void Stage::Release()
 {
-	/*for (int i = 0; i < stageWidth_; i++) {
+	for (int i = 0; i < stageWidth_; i++) {
 		std::vector<int>sdata(stageWidth_, 0);
 		stageData.push_back(sdata);
-	}*/
+	}
 }

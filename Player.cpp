@@ -5,12 +5,6 @@
 #include "Stage.h"
 #include "Life.h"
 
-namespace PlayerSetting {
-	const float PLAYER_MOVE_SPEED{ 0.1f };
-}
-
-namespace PS = PlayerSetting;
-
 Player::Player(GameObject* parent)
 	:GameObject(parent, "Player"), hModel_(-1), speed_(0), pStage(nullptr), InvincibleTime(0),
 	moveingpositionnum(1)
@@ -31,6 +25,7 @@ void Player::Initialize()
 
 	plife = Instantiate<Life>(this);
 	plife->SetLife(3);
+
 	moveingposition[0] = -0.5;
 	moveingposition[1] = 0.5;
 	moveingposition[2] = 1.5;
@@ -39,16 +34,14 @@ void Player::Initialize()
 void Player::Update()
 {
 	
-	if (Input::IsMouseButtonDown(1)) {
+	if (Input::IsKeyDown(DIK_RIGHT)) {
 		/*if (transform_.position_.x < 1.6)
 			transform_.position_.x = transform_.position_.x + 0.1;*/
 		if (moveingpositionnum < 2)
 			moveingpositionnum++;
 	}
 		
-	
-
-	if (Input::IsMouseButtonDown(0)) {
+	if (Input::IsKeyDown(DIK_LEFT)) {
 		/*if (transform_.position_.x > -0.5)
 			transform_.position_.x = transform_.position_.x - 0.1;*/
 		if (moveingpositionnum > 0)
@@ -82,34 +75,34 @@ void Player::Update()
 		}
 	}
 
+	//í èÌÅ@1
+	//Invincibletime 1Ç∆0Çåå›Ç…
+
+	if (InvincibleTime < 0) {
+		FlashingIntervalTime = PS::FLASHING_INTERVAL;
+		IsDraw = true;
+	}
+	else {
+		if (FlashingIntervalTime < 0) {
+			if (IsDraw) {
+				IsDraw = false;
+			}
+			else {
+				IsDraw = true;
+			}
+			FlashingIntervalTime = PS::FLASHING_INTERVAL;
+		}
+		FlashingIntervalTime--;
+	}
+
 	InvincibleTime--;
 }
 
 void Player::Draw()
 {
-	//í èÌÅ@1
-	//Invincibletime 1Ç∆0Çåå›Ç…
-
-	if (InvincibleTime < 0) {
+	if (IsDraw) {
 		Model::SetTransform(hModel_, transform_);
 		Model::Draw(hModel_);
-		FlashingIntervalTime = 15;
-	}
-	else {
-		if (FlashingIntervalTime < 0) {
-			if (IsFlash) {
-				IsFlash = false;
-			}
-			else {
-				IsFlash = true;
-			}
-			FlashingIntervalTime = 15;
-		}
-		if (IsFlash) {
-			Model::SetTransform(hModel_, transform_);
-			Model::Draw(hModel_);
-		}
-		FlashingIntervalTime--;
 	}
 
 	CollisionDraw();
@@ -124,7 +117,7 @@ void Player::OnCollision(GameObject* pTarget)
 	if (pTarget->GetObjectName() == "Enemy" && InvincibleTime <= 0)
 	{
 		plife->ReduseNowLife();
-		InvincibleTime = 60;
+		InvincibleTime = PS::INVINCIBLE_INTERVAL;
 	}
 	if (plife->GetNowLife() <= 0) {
 		this->KillMe();

@@ -29,7 +29,7 @@ void Enemy::Update()
 		transform_.position_.z -= speed_;
 	}
 
-	if (transform_.position_.z < -5) {
+	if (transform_.position_.z < 0) {
 		KillMe();
 	}
 }

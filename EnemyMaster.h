@@ -4,8 +4,9 @@
 #include"Gauge.h"
 
 namespace EnemyMasterSetting {
-	const int EnemyRow(5);
+	const int EnemyRow(6);
 	const int EnemyLine(3);
+	const int EnemyCombination[EnemyRow][EnemyLine] = { {1,0,0},{0,1,0},{0,0,1},{1,1,0},{1,0,1},{0,1,1} };
 }
 
 namespace EMS = EnemyMasterSetting;
