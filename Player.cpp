@@ -3,6 +3,7 @@
 #include "Engine\Input.h"
 #include "Engine\Debug.h"
 #include "Stage.h"
+#include "Life.h"
 
 namespace PlayerSetting {
 	const float PLAYER_MOVE_SPEED{ 0.1f };
@@ -11,7 +12,7 @@ namespace PlayerSetting {
 namespace PS = PlayerSetting;
 
 Player::Player(GameObject* parent)
-	:GameObject(parent, "Player"), hModel_(-1), speed_(0), pStage(nullptr),
+	:GameObject(parent, "Player"), hModel_(-1), speed_(0), pStage(nullptr), InvincibleTime(0),
 	moveingpositionnum(1)
 {
 }
@@ -28,6 +29,8 @@ void Player::Initialize()
 	SphereCollider* collision = new SphereCollider({ 0,0.3,0 }, 0.3f);
 	AddCollider(collision);
 
+	plife = Instantiate<Life>(this);
+	plife->SetLife(3);
 	moveingposition[0] = -0.5;
 	moveingposition[1] = 0.5;
 	moveingposition[2] = 1.5;
@@ -78,12 +81,37 @@ void Player::Update()
 			transform_.position_.x += speed_;
 		}
 	}
+
+	InvincibleTime--;
 }
 
 void Player::Draw()
 {
-	Model::SetTransform(hModel_, transform_);
-	Model::Draw(hModel_);
+	//í èÌÅ@1
+	//Invincibletime 1Ç∆0Çåå›Ç…
+
+	if (InvincibleTime < 0) {
+		Model::SetTransform(hModel_, transform_);
+		Model::Draw(hModel_);
+		FlashingIntervalTime = 15;
+	}
+	else {
+		if (FlashingIntervalTime < 0) {
+			if (IsFlash) {
+				IsFlash = false;
+			}
+			else {
+				IsFlash = true;
+			}
+			FlashingIntervalTime = 15;
+		}
+		if (IsFlash) {
+			Model::SetTransform(hModel_, transform_);
+			Model::Draw(hModel_);
+		}
+		FlashingIntervalTime--;
+	}
+
 	CollisionDraw();
 }
 
@@ -93,8 +121,12 @@ void Player::Release()
 
 void Player::OnCollision(GameObject* pTarget)
 {
-	if (pTarget->GetObjectName() == "Enemy")
+	if (pTarget->GetObjectName() == "Enemy" && InvincibleTime <= 0)
 	{
+		plife->ReduseNowLife();
+		InvincibleTime = 60;
+	}
+	if (plife->GetNowLife() <= 0) {
 		this->KillMe();
 	}
 }

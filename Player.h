@@ -2,6 +2,7 @@
 #include "Engine\GameObject.h"
 
 class Stage;
+class Life;
 
 enum Dir {
 	RIGHT,LEFT, NONE
@@ -14,7 +15,11 @@ class Player :
 	float speed_;
 	float moveingposition[3];
 	int moveingpositionnum;
+	int InvincibleTime;
+	int FlashingIntervalTime;
+	bool IsFlash;
 	Stage* pStage;
+	Life* plife;
 public:
 	Player(GameObject* parent);
 

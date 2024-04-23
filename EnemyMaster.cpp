@@ -20,7 +20,7 @@ void EnemyMaster::Initialize()
 		}
 	}
 	PhaseGauge = (Gauge*)FindObject("Gauge");
-	PhaseGauge->SetPosition(0.45, 0.9, 0);
+	PhaseGauge->SetPosition(0.45, 0.85, 0);
 }
 
 void EnemyMaster::Update()
@@ -118,8 +118,8 @@ void EnemyMaster::Draw()
 	Text t;
 	char c[] = "level";
 	t.Initialize();
-	t.Draw(1100, 40, c);
-	t.Draw(1200, 40, Phase);
+	t.Draw(800, 55, c);
+	t.Draw(900, 55, Phase);
 }
 
 void EnemyMaster::Release()
