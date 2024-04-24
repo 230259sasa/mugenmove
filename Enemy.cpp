@@ -13,11 +13,11 @@ Enemy::Enemy(GameObject* parent)
 void Enemy::Initialize()
 {
 	hModel_ = Model::Load("Model\\Bullet.fbx");
-	//hModel_ = Model::Load("Model\\car1.fbx");
+	//hModel_ = Model::Load("Model\\arrow.fbx");
 	assert(hModel_ >= 0);
 	speed_ = 0.05f;
-	//transform_.scale_ = { 0.3,0.3,0.3 };
-	transform_.rotate_.y = 90;
+	//transform_.scale_ = { 0.6,0.6,0.6 };
+	transform_.rotate_.y = 180;
 	transform_.position_ = { 3,0,8 };
 	SphereCollider* collision = new SphereCollider({ 0,0,0 }, 0.3f);
 	AddCollider(collision);

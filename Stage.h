@@ -8,6 +8,9 @@ class Stage :
 {
 	int hFloor_;
 	int hLoad_;
+	int ClearPhase;
+	float zpos;
+	bool IsClear;
 
 	std::vector<std::vector<int>> stageData;
 	int stageWidth_, stageHeight_;

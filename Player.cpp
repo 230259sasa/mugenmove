@@ -4,6 +4,9 @@
 #include "Engine\Debug.h"
 #include "Stage.h"
 #include "Life.h"
+#include"Engine/SceneManager.h"
+
+namespace PS = PlayerSetting;
 
 Player::Player(GameObject* parent)
 	:GameObject(parent, "Player"), hModel_(-1), speed_(0), pStage(nullptr), InvincibleTime(0),
@@ -17,7 +20,7 @@ void Player::Initialize()
 	hModel_ = Model::Load("Model\\Player.fbx");
 	assert(hModel_ >= 0);
 	//transform_.scale_ = {0.01,0.01,0.01 };
-	//transform_.rotate_.x = -90;
+	//transform_.rotate_.y = 180;
 	transform_.position_ = { 0.6,0,3 };
 	speed_ = PS::PLAYER_MOVE_SPEED;
 	SphereCollider* collision = new SphereCollider({ 0,0.3,0 }, 0.3f);
@@ -33,7 +36,6 @@ void Player::Initialize()
 
 void Player::Update()
 {
-	
 	if (Input::IsKeyDown(DIK_RIGHT)) {
 		/*if (transform_.position_.x < 1.6)
 			transform_.position_.x = transform_.position_.x + 0.1;*/
@@ -118,8 +120,13 @@ void Player::OnCollision(GameObject* pTarget)
 	{
 		plife->ReduseNowLife();
 		InvincibleTime = PS::INVINCIBLE_INTERVAL;
+		IsDraw = false;
+		if (plife->GetNowLife() <= 0) {
+			this->KillMe();
+		}
 	}
-	if (plife->GetNowLife() <= 0) {
-		this->KillMe();
+	if (pTarget->GetObjectName() == "Goal") {
+		SceneManager* pSM = (SceneManager*)(FindObject("SceneManager"));
+		pSM->ChangeScene(SCENE_ID_CLEAR);
 	}
 }

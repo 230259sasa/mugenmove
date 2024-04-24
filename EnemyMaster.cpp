@@ -2,16 +2,17 @@
 #include"Engine\Debug.h"
 #include"Engine/Text.h"
 
+namespace EMS = EnemyMasterSetting;
+
 EnemyMaster::EnemyMaster(GameObject* parent)
-	:GameObject(parent, "EnemyMaster"), frame(0),enemyrow(0),Phase(0),NextPhase(0),
+	:GameObject(parent, "EnemyMaster"), frame(0),enemyrow(0),PhaseCount(0),NextPhase(0),
 	spawnframe(120),PhaseFrame(600),speed_(0.05)
 {
 }
 
 void EnemyMaster::Initialize()
 {
-	PhaseGauge = (Gauge*)FindObject("Gauge");
-	PhaseGauge->SetPosition(0.45, 0.85, 0);
+	ePhase = (Phase*)FindObject("Phase");
 }
 
 void EnemyMaster::Update()
@@ -19,20 +20,21 @@ void EnemyMaster::Update()
 	if (frame <= 0) {
 		frame = spawnframe;
 
-		int r = rand() % EMS::EnemyRow;
 		float rspeed = 0.0f;
-
-		if (rand() % 4 == 0)
+		int r = rand() % EMS::EnemyRow;
+		if (rand() % 4 == 0) {
 			switch (rand() % 2) {
 			case 0:
-				rspeed = 0.02;
+				rspeed = 0.01;
 				break;
 			case 1:
-				rspeed = -0.02;
+				rspeed = -0.01;
 				break;
 			default:
 				break;
 			}
+		}
+
 		for (int i = 0; i < EMS::EnemyLine; i++) {
 
 			//enemy[enemyrow][posrand]->SetTransformPosition(posrand-0.5,0.2,15);
@@ -40,21 +42,27 @@ void EnemyMaster::Update()
 				Enemy* e = Instantiate<Enemy>(this);
 				e->SetTransformPosition(i - 0.5, 0.2, 15);
 				e->SetSpeed(speed_+rspeed);
+				if (speed_ + rspeed > 1) {
+					e->SetRotateY(0);
+				}
+				else {
+					e->SetRotateY(180);
+				}
 				e->IsMoveStart();
 			}
 		}
 	}
 
-	PhaseGauge->SetGaugeVal(PhaseFrame, 600);
-	if (PhaseFrame <= 0) {
+	
+	/*if (PhaseFrame <= 0) {
 		PhaseFrame = 600;
 		NextPhase++;
-	}
+	}*/
 
-	if (Phase != NextPhase) {
-		Phase = NextPhase;
+	if (PhaseCount != ePhase->GetPhase()) {
+		PhaseCount = ePhase->GetPhase();
 		float nextspeed=0;
-		switch (Phase) {
+		switch (PhaseCount) {
 		case 0:
 			nextspeed = 0.05;
 		case 1:
@@ -87,16 +95,11 @@ void EnemyMaster::Update()
 	}
 
 	frame--;
-	PhaseFrame--;
+	//PhaseFrame--;
 }
 
 void EnemyMaster::Draw()
 {
-	Text t;
-	char c[] = "level";
-	t.Initialize();
-	t.Draw(800, 100, c);
-	t.Draw(900, 100, Phase);
 }
 
 void EnemyMaster::Release()

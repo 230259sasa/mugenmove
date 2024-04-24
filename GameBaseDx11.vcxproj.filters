@@ -107,14 +107,26 @@
     <ClCompile Include="Player.cpp">
       <Filter>Play</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="GameOverScene.cpp" />
     <ClCompile Include="EnemyMaster.cpp">
       <Filter>Play</Filter>
     </ClCompile>
     <ClCompile Include="Gauge.cpp" />
-    <ClCompile Include="Life.cpp" />
+    <ClCompile Include="ClearScene.cpp" />
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Goal.cpp">
+      <Filter>Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Life.cpp">
+      <Filter>Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Phase.cpp">
+      <Filter>Play</Filter>
+    </ClCompile>
+    <ClCompile Include="VibrationCamera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -195,14 +207,26 @@
     <ClInclude Include="Player.h">
       <Filter>Play</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h" />
     <ClInclude Include="TitleScene.h" />
     <ClInclude Include="GameOverScene.h" />
     <ClInclude Include="EnemyMaster.h">
       <Filter>Play</Filter>
     </ClInclude>
     <ClInclude Include="Gauge.h" />
-    <ClInclude Include="Life.h" />
+    <ClInclude Include="ClearScene.h" />
+    <ClInclude Include="Enemy.h">
+      <Filter>Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Goal.h">
+      <Filter>Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Life.h">
+      <Filter>Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Phase.h">
+      <Filter>Play</Filter>
+    </ClInclude>
+    <ClInclude Include="VibrationCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\Simple2D.hlsl">

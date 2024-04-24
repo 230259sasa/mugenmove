@@ -7,8 +7,6 @@ namespace PlayerSetting {
 	const float PLAYER_MOVE_SPEED{ 0.1f };
 }
 
-namespace PS = PlayerSetting;
-
 class Stage;
 class Life;
 

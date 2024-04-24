@@ -125,6 +125,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ClearScene.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyMaster.cpp" />
     <ClCompile Include="Engine\Audio.cpp" />
@@ -152,13 +153,17 @@
     <ClCompile Include="Engine\Transform.cpp" />
     <ClCompile Include="GameOverScene.cpp" />
     <ClCompile Include="Gauge.cpp" />
+    <ClCompile Include="Goal.cpp" />
     <ClCompile Include="Life.cpp" />
+    <ClCompile Include="Phase.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayScene.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="TitleScene.cpp" />
+    <ClCompile Include="VibrationCamera.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ClearScene.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyMaster.h" />
     <ClInclude Include="Engine\Audio.h" />
@@ -186,11 +191,14 @@
     <ClInclude Include="Engine\Transform.h" />
     <ClInclude Include="GameOverScene.h" />
     <ClInclude Include="Gauge.h" />
+    <ClInclude Include="Goal.h" />
     <ClInclude Include="Life.h" />
+    <ClInclude Include="Phase.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayScene.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="TitleScene.h" />
+    <ClInclude Include="VibrationCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\BillBoard.hlsl">

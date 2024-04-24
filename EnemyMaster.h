@@ -2,6 +2,7 @@
 #include "Engine\GameObject.h"
 #include"Enemy.h"
 #include"Gauge.h"
+#include"Phase.h"
 
 namespace EnemyMasterSetting {
 	const int EnemyRow(6);
@@ -9,21 +10,20 @@ namespace EnemyMasterSetting {
 	const int EnemyCombination[EnemyRow][EnemyLine] = { {1,0,0},{0,1,0},{0,0,1},{1,1,0},{1,0,1},{0,1,1} };
 }
 
-namespace EMS = EnemyMasterSetting;
-
 class Enemy;
 class Gauge;
+class Phase;
 
 class EnemyMaster :
     public GameObject
 {
-	Gauge* PhaseGauge;
-	Enemy* enemy[EMS::EnemyRow][EMS::EnemyLine];
+	Phase* ePhase;
+	//Enemy* enemy[EMS::EnemyRow][EMS::EnemyLine];
 	int frame;
 	int enemyrow;
 	int spawnframe;
 	int PhaseFrame;
-	int Phase;
+	int PhaseCount;
 	int NextPhase;
 	float speed_;
 public:
