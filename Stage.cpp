@@ -8,7 +8,7 @@
 
 Stage::Stage(GameObject* parent)
 	:GameObject(parent, "Stage"), hFloor_(-1), hLoad_(-1), stageWidth_(3), stageHeight_(15),ClearPhase(10),
-	IsClear(false)
+	IsClear(false),speed(0.05)
 {
 }
 
@@ -26,7 +26,7 @@ void Stage::Update()
 	if (zpos >= 1.5) {
 		zpos = 0;
 	}
-	zpos += 0.1;
+	zpos += speed;
 
 	Phase* sPhase = (Phase*)FindObject("Phase");
 	if (ClearPhase == sPhase->GetPhase() && !IsClear) {

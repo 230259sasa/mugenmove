@@ -10,6 +10,8 @@ namespace EnemyMasterSetting {
 	const int EnemyCombination[EnemyRow][EnemyLine] = { {1,0,0},{0,1,0},{0,0,1},{1,1,0},{1,0,1},{0,1,1} };
 }
 
+namespace EMS = EnemyMasterSetting;
+
 class Enemy;
 class Gauge;
 class Phase;
@@ -18,7 +20,7 @@ class EnemyMaster :
     public GameObject
 {
 	Phase* ePhase;
-	//Enemy* enemy[EMS::EnemyRow][EMS::EnemyLine];
+	Enemy* enemy[EMS::EnemyRow][EMS::EnemyLine];
 	int frame;
 	int enemyrow;
 	int spawnframe;

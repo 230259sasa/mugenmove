@@ -1,9 +1,8 @@
 #include "EnemyMaster.h"
 #include"Engine\Debug.h"
 #include"Engine/Text.h"
-
-namespace EMS = EnemyMasterSetting;
-
+#include "Stage.h"
+#include "Engine/Debug.h"
 EnemyMaster::EnemyMaster(GameObject* parent)
 	:GameObject(parent, "EnemyMaster"), frame(0),enemyrow(0),PhaseCount(0),NextPhase(0),
 	spawnframe(120),PhaseFrame(600),speed_(0.05)
@@ -13,6 +12,12 @@ EnemyMaster::EnemyMaster(GameObject* parent)
 void EnemyMaster::Initialize()
 {
 	ePhase = (Phase*)FindObject("Phase");
+
+	for (int i = 0; i < EMS::EnemyRow; i++) {
+		for (int j = 0; j < EMS::EnemyLine; j++) {
+			enemy[i][j] = Instantiate<Enemy>(this);
+		}
+	}
 }
 
 void EnemyMaster::Update()
@@ -22,7 +27,8 @@ void EnemyMaster::Update()
 
 		float rspeed = 0.0f;
 		int r = rand() % EMS::EnemyRow;
-		if (rand() % 4 == 0) {
+
+		/*if (rand() % 4 == 0) {
 			switch (rand() % 2) {
 			case 0:
 				rspeed = 0.01;
@@ -33,24 +39,27 @@ void EnemyMaster::Update()
 			default:
 				break;
 			}
-		}
+		}*/
 
 		for (int i = 0; i < EMS::EnemyLine; i++) {
-
-			//enemy[enemyrow][posrand]->SetTransformPosition(posrand-0.5,0.2,15);
 			if (EMS::EnemyCombination[r][i] == 1) {
-				Enemy* e = Instantiate<Enemy>(this);
+				/*Enemy* e = Instantiate<Enemy>(this);
 				e->SetTransformPosition(i - 0.5, 0.2, 15);
-				e->SetSpeed(speed_+rspeed);
-				if (speed_ + rspeed > 1) {
+				e->SetSpeed(speed_);
+				if (speed_ > 1) {
 					e->SetRotateY(0);
 				}
 				else {
 					e->SetRotateY(180);
-				}
-				e->IsMoveStart();
+				}*/
+				//e->IsMoveStart();
+
+				enemy[enemyrow][i]->SetTransformPosition(i - 0.5, 0.2, 15);
+				enemy[enemyrow][i]->IsMoveStart();
+				
 			}
 		}
+		enemyrow = (enemyrow + 1) % EMS::EnemyRow;
 	}
 
 	
@@ -92,6 +101,14 @@ void EnemyMaster::Update()
 		}
 		spawnframe = 120 / (nextspeed / 0.05);
 		speed_ = nextspeed;
+		Stage* eStage = (Stage*)FindObject("Stage");
+		eStage->SetSpeed(speed_);
+
+		for (int i = 0; i < EMS::EnemyRow; i++) {
+			for (int j = 0; j < EMS::EnemyLine; j++) {
+				enemy[i][j]->SetSpeed(speed_);
+			}
+		}
 	}
 
 	frame--;

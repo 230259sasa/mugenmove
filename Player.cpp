@@ -27,7 +27,7 @@ void Player::Initialize()
 	AddCollider(collision);
 
 	plife = Instantiate<Life>(this);
-	plife->SetLife(3);
+	plife->SetLife(10);
 
 	moveingposition[0] = -0.5;
 	moveingposition[1] = 0.5;

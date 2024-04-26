@@ -18,7 +18,7 @@ void Enemy::Initialize()
 	speed_ = 0.05f;
 	//transform_.scale_ = { 0.6,0.6,0.6 };
 	transform_.rotate_.y = 180;
-	transform_.position_ = { 3,0,8 };
+	transform_.position_ = { 30,0,8 };
 	SphereCollider* collision = new SphereCollider({ 0,0,0 }, 0.3f);
 	AddCollider(collision);
 }
@@ -30,7 +30,7 @@ void Enemy::Update()
 	}
 
 	if (transform_.position_.z < 0) {
-		KillMe();
+		//KillMe();
 	}
 }
 

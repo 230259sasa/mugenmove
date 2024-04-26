@@ -4,7 +4,8 @@ class VibrationCamera :
     public GameObject
 {
 	int frame;
-	bool Is;
+	int vibrationnum;
+	float VibrationStrenght;
 public:
 	VibrationCamera(GameObject* parent);
 

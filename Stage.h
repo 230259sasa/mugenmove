@@ -10,6 +10,7 @@ class Stage :
 	int hLoad_;
 	int ClearPhase;
 	float zpos;
+	float speed;
 	bool IsClear;
 
 	std::vector<std::vector<int>> stageData;
@@ -31,5 +32,6 @@ public:
 public:
 	int GetStageWidth() { return stageWidth_; }
 	int GetStageHeight() { return stageHeight_; }
+	void SetSpeed(float s) { speed = s; }
 };
 
