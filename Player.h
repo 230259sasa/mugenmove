@@ -9,6 +9,7 @@ namespace PlayerSetting {
 
 class Stage;
 class Life;
+class VibrationCamera;
 
 enum Dir {
 	RIGHT,LEFT, NONE
@@ -26,6 +27,7 @@ class Player :
 	bool IsDraw;
 	Stage* pStage;
 	Life* plife;
+	VibrationCamera* pVib;
 public:
 	Player(GameObject* parent);
 

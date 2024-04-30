@@ -15,7 +15,6 @@ void Enemy::Initialize()
 	hModel_ = Model::Load("Model\\Bullet.fbx");
 	//hModel_ = Model::Load("Model\\arrow.fbx");
 	assert(hModel_ >= 0);
-	speed_ = 0.05f;
 	//transform_.scale_ = { 0.6,0.6,0.6 };
 	transform_.rotate_.y = 180;
 	transform_.position_ = { 30,0,8 };

@@ -15,10 +15,12 @@ namespace EMS = EnemyMasterSetting;
 class Enemy;
 class Gauge;
 class Phase;
+class Player;
 
 class EnemyMaster :
     public GameObject
 {
+	Player* ePlayer;
 	Phase* ePhase;
 	Enemy* enemy[EMS::EnemyRow][EMS::EnemyLine];
 	int frame;

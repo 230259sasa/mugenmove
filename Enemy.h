@@ -30,5 +30,6 @@ public:
 	void IsMoveStart() { ismove_ = true; }
 	void IsMoveStop() { ismove_ = false; }
 	void SetSpeed(float _speed) { speed_ = _speed; }
+	bool GetIsMove() { return ismove_; }
 };
 

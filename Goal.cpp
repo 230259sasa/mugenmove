@@ -19,7 +19,7 @@ void Goal::Initialize()
 
 void Goal::Update()
 {
-	transform_.position_.z -= 0.1;
+	//transform_.position_.z -= 0.1;
 }
 
 void Goal::Draw()
